@@ -1,22 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, useColorScheme, View } from "react-native";
+
+import { DarkMode } from "./stylesheet/dark";
+import { LightMode } from "./stylesheet/light";
 
 export default function About() {
+	const ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
     return (
-        <View style = {styles.container}>
-            <Text style = {styles.text}>Hello World From Screen 1</Text>
+        <View style = {ColorScheme.main}>
+            <Text style = {ColorScheme.content}>Hello World From Screen 1</Text>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-	container : {
-		flex : 1,
-		flexDirection : "row",
-		backgroundColor : "#404040",
-		justifyContent : "center",
-		alignItems : "center",
-	},
-	text : {
-		color : "#f0f0f0",
-	}
-})
