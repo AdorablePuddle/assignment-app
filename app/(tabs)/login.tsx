@@ -1,14 +1,9 @@
-import * as SecureStore from 'expo-secure-store';
 import { StyleSheet, useColorScheme, View } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
 
 import { DarkMode, DarkModePalette } from "./stylesheet/dark";
 import { LightMode, LightModePalette } from "./stylesheet/light";
-
-async function getDarkMode() {
-    let result = await SecureStore
-}
 
 export default function Login() {
     const ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
