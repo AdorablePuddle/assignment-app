@@ -16,7 +16,7 @@ export default function Home() {
 	const DistanceImage = require("../assets/images/distance_light.png");
 
 	const recordButton = () => {
-
+		
 	}
 
 	return (
