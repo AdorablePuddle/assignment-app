@@ -52,22 +52,6 @@ export default function TabLayout() {
                     ),
                 }} 
             />
-			<Tabs.Screen 
-                name = "stylesheet/dark" 
-                options = {{ 
-                    title: "Login",
-                    headerShown : false,
-                    href : null  
-                }} 
-            />
-			<Tabs.Screen 
-                name = "stylesheet/light" 
-                options = {{ 
-                    title: "Login",
-                    headerShown : false,
-                    href : null  
-                }} 
-            />
         </Tabs>
     );
 }

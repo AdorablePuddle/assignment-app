@@ -6,7 +6,7 @@ export const DarkModePalette = {
     vignette : "#ACADBF", 
     color1 : "#FF2893", 
     color2 : "#FF89C4", 
-    white : "#FFFFFF", 
+    white : "#000000", 
 };
 
 const screenDimensions = Dimensions.get('screen');
