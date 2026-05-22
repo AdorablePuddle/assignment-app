@@ -9,8 +9,8 @@ export default function Home() {
 	// Variables
 
 	// Defining images and appearances
-	let ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
-	let ColorPalette = (useColorScheme() === "dark")? DarkModePalette : LightModePalette;
+	const ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
+	const ColorPalette = (useColorScheme() === "dark")? DarkModePalette : LightModePalette;
 
 	const TopImage = require("../assets/images/top_light.png");
 	const DistanceImage = require("../assets/images/distance_light.png");
@@ -32,7 +32,7 @@ export default function Home() {
 					source = {TopImage}
 					style = {HomeStyleSheet.top_logo}
 				/>
-				<Text style = {ColorScheme.title}>Distance</Text>
+				<Text style = {[ColorScheme.title, HomeStyleSheet.title]}>Distance</Text>
 				<ImageBackground
 					source = {DistanceImage}
 					resizeMode = "stretch"
@@ -74,6 +74,9 @@ const HomeStyleSheet = StyleSheet.create({
 		alignItems : "center",
 		width : 400,
 		height : 200
+	},
+	title : {
+		fontWeight : "bold",
 	},
 	text : {
 		textAlign : "center",

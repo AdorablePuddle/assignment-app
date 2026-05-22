@@ -9,8 +9,8 @@ export default function Tracking() {
 	// Variables
 
 	// Defining images and appearances
-	let ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
-	let ColorPalette = (useColorScheme() === "dark")? DarkModePalette : LightModePalette;
+	const ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
+	const ColorPalette = (useColorScheme() === "dark")? DarkModePalette : LightModePalette;
 
 	const TopImage = require("../assets/images/top_light.png");
 

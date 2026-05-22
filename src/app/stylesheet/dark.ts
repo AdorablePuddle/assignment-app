@@ -1,12 +1,12 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 export const DarkModePalette = {
-    base : "#C0C2D0", 
-    accent : "#CBCDD8", 
-    vignette : "#ACADBF", 
-    color1 : "#FF2893", 
-    color2 : "#FF89C4", 
-    white : "#000000", 
+    base : "#373737", 
+    accent : "#404040", 
+    vignette : "#4a4a4a", 
+    color1 : "#00e4e4", 
+    color2 : "#00b3b6",  
+    white : "#FFFFFF",
 };
 
 const screenDimensions = Dimensions.get('screen');

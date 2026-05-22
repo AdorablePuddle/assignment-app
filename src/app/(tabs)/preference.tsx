@@ -11,17 +11,6 @@ function setAppearance(appearance : string) {
 	SecureStore.setItem("appearance", appearance);
 }
 
-function getAppearance() {
-	let result = SecureStore.getItem("appearance");
-	if (result) {
-		if (result === "dark") return "dark";
-		if (result === "light") return "light";
-	}
-	alert("No preference data found. Defaulting to dark mode. Preference changes is available in setting.");
-	SecureStore.setItem("appearance", "dark");
-	return "dark";
-}
-
 export default function Preference() {
 	// Variables
 	const [darkModeToggle, setDarkModeToggle] = useState(Appearance.getColorScheme());
@@ -38,8 +27,8 @@ export default function Preference() {
 	}
 
 	// Defining images and appearances
-	let ColorScheme = (isDarkMode)? DarkMode : LightMode;
-	let ColorPalette = (isDarkMode)? DarkModePalette : LightModePalette;
+	const ColorScheme = (isDarkMode)? DarkMode : LightMode;
+	const ColorPalette = (isDarkMode)? DarkModePalette : LightModePalette;
 
 	const TopImage = require("../assets/images/top_light.png");
 
