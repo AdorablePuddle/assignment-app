@@ -2,8 +2,8 @@ import { StyleSheet, useColorScheme, View } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
 
-import { DarkMode, DarkModePalette } from "./stylesheet/dark";
-import { LightMode, LightModePalette } from "./stylesheet/light";
+import { DarkMode, DarkModePalette } from "../stylesheet/dark";
+import { LightMode, LightModePalette } from "../stylesheet/light";
 
 
 export default function Tracking() {
