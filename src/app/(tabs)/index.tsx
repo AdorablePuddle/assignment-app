@@ -6,9 +6,16 @@ import { useState } from "react";
 import { DarkMode, DarkModePalette } from "../stylesheet/dark";
 import { LightMode, LightModePalette } from "../stylesheet/light";
 
+import {
+	isStepCountingSupported,
+	startStepCounterUpdate,
+	stopStepCounterUpdate
+} from "@dongminyu/react-native-step-counter";
+
 export default function Home() {
 	// Variables
 	const [isRecording, setIsRecording] = useState(false);
+	const [stepCounter, setStepCounter] = useState(0);
 
 	// Defining images and appearances
 	const ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
@@ -17,7 +24,20 @@ export default function Home() {
 	const TopImage = require("../assets/images/top_light.png");
 	const DistanceImage = require("../assets/images/distance_light.png");
 
-	const recordButton = () => {
+	const recordButton = async () => {
+		// Insert step tracking logic here.
+		if (!isRecording === true) {
+			const status = await isStepCountingSupported();
+			setStepCounter(0);
+
+			if (status.supported && status.granted) {
+				startStepCounterUpdate(new Date(), (data) => {
+					setStepCounter(data.steps);
+				});
+			}
+		} else {
+			stopStepCounterUpdate();
+		}
 		setIsRecording(!isRecording);
 	}
 
@@ -34,13 +54,13 @@ export default function Home() {
 					source = {TopImage}
 					style = {HomeStyleSheet.top_logo}
 				/>
-				<Text style = {[ColorScheme.title, HomeStyleSheet.title]}>Distance</Text>
+				<Text style = {[ColorScheme.title, HomeStyleSheet.title]}>Steps</Text>
 				<ImageBackground
 					source = {DistanceImage}
 					resizeMode = "stretch"
 					style = {HomeStyleSheet.image}
 				>
-					<Text style = {[ColorScheme.content, HomeStyleSheet.text]}>0m</Text>
+					<Text style = {[ColorScheme.content, HomeStyleSheet.text]}>{stepCounter}</Text>
 				</ImageBackground>
 				<Pressable
 					onPress = {recordButton}
