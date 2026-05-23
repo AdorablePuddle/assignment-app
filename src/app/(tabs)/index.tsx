@@ -2,11 +2,13 @@ import { Image, ImageBackground, Pressable, StyleSheet, Text, useColorScheme, Vi
 
 import { LinearGradient } from "expo-linear-gradient";
 
+import { useState } from "react";
 import { DarkMode, DarkModePalette } from "../stylesheet/dark";
 import { LightMode, LightModePalette } from "../stylesheet/light";
 
 export default function Home() {
 	// Variables
+	const [isRecording, setIsRecording] = useState(false);
 
 	// Defining images and appearances
 	const ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
@@ -16,7 +18,7 @@ export default function Home() {
 	const DistanceImage = require("../assets/images/distance_light.png");
 
 	const recordButton = () => {
-		
+		setIsRecording(!isRecording);
 	}
 
 	return (
@@ -41,7 +43,7 @@ export default function Home() {
 					<Text style = {[ColorScheme.content, HomeStyleSheet.text]}>0m</Text>
 				</ImageBackground>
 				<Pressable
-					onPress = {() => recordButton}
+					onPress = {recordButton}
 					style = {({pressed}) => [
 						HomeStyleSheet.button,
 						{
@@ -51,7 +53,7 @@ export default function Home() {
 						}
 					]}
 				>
-					<Text style = {[HomeStyleSheet.button_text, {color : ColorPalette.white}]}>Start Run</Text>
+					<Text style = {[HomeStyleSheet.button_text, {color : ColorPalette.white}]}>{(isRecording)? "Stop Recording" : "Start Recording"}</Text>
 				</Pressable>
 			</LinearGradient>
 		</View>
@@ -83,10 +85,11 @@ const HomeStyleSheet = StyleSheet.create({
 	},
 	button : {
 		paddingVertical : 10,
-		paddingHorizontal : 30,
+		width : 200,
 		borderRadius : 10,
 	},
 	button_text : {
 		fontSize : 20,
+		textAlign : "center",
 	}
 });
