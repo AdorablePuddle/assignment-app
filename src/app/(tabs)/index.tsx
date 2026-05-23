@@ -16,6 +16,8 @@ export default function Home() {
 	// Variables
 	const [isRecording, setIsRecording] = useState(false);
 	const [stepCounter, setStepCounter] = useState(0);
+	const [startTime, setStartTime] = useState(0);
+	const [previousTime, setPreviousTime] = useState(0);
 
 	// Defining images and appearances
 	const ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
@@ -28,6 +30,7 @@ export default function Home() {
 		// Insert step tracking logic here.
 		if (!isRecording === true) {
 			const status = await isStepCountingSupported();
+			setStartTime(Date.now());
 			setStepCounter(0);
 
 			if (status.supported && status.granted) {
@@ -37,8 +40,17 @@ export default function Home() {
 			}
 		} else {
 			stopStepCounterUpdate();
+			const currentTime = Date.now();
+			setPreviousTime(currentTime - startTime);
 		}
 		setIsRecording(!isRecording);
+	}
+
+	const gatTimeString = (ms : number) : string => {
+		const second = (ms / 1000) % 60;
+		const minute = Math.round(((ms / 1000) / 60)) % 60;
+		const hour   = Math.round(minute / 60);
+		return hour + ((minute < 10)? ":0" : ":") + minute + ((second < 10)? ":0" : ":") + second;
 	}
 
 	return (
@@ -62,6 +74,12 @@ export default function Home() {
 				>
 					<Text style = {[ColorScheme.content, HomeStyleSheet.text]}>{stepCounter}</Text>
 				</ImageBackground>
+				<Text style = {[
+					HomeStyleSheet.timer_text,
+					{
+
+					}
+				]}>Previous Time: {gatTimeString(previousTime)}</Text>
 				<Pressable
 					onPress = {recordButton}
 					style = {({pressed}) => [
@@ -102,6 +120,11 @@ const HomeStyleSheet = StyleSheet.create({
 	},
 	text : {
 		textAlign : "center",
+	},
+	timer_text : {
+		textAlign : "center",
+		fontSize : 20,
+		paddingBottom : 15,
 	},
 	button : {
 		paddingVertical : 10,
