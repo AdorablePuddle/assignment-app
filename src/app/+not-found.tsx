@@ -1,7 +1,7 @@
 import { Text, useColorScheme, View } from "react-native";
 
-import { DarkMode } from "./(tabs)/stylesheet/dark";
-import { LightMode } from "./(tabs)/stylesheet/light";
+import { DarkMode } from "./stylesheet/dark";
+import { LightMode } from "./stylesheet/light";
 
 
 export default function Home() {

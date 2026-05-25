@@ -20,7 +20,12 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.adorablepuddle.assignmentapp"
+      "googleServicesFile": "./key/google-services.json",
+      "package": "com.adorablepuddle.assignmentapp",
+      "permission": [
+        "android.permission.ACTIVITY_RECOGNITION",
+        "android.permission.FOREGROUND_SERVICE"
+      ]
     },
     "web": {
       "output": "static",
@@ -40,12 +45,18 @@
           }
         }
       ],
+      "expo-font",
+      "expo-secure-store",
+      "expo-sqlite",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "react-native-health-connect",
       [
-        "expo-font",
+        "expo-build-properties",
         {
-          "font": [
-            "node_modules/@expo-google-fonts/google-sans-flex/400Regular/GoogleSansFlex_400Regular.ttf"
-          ]
+          "android": {
+            "minSdkVersion": 26,
+          }
         }
       ],
     ],
@@ -56,9 +67,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "6c595e09-dc3d-4e96-8b16-686dbb44a8ae"
+        "projectId": "eb674ef1-5ed6-4dc3-8e8d-375886c0b73d"
       }
     },
-    "owner": "adorablepuddle"
+    "owner": "adorablestpuddle"
   }
 }
