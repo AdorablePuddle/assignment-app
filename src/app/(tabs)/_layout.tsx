@@ -1,11 +1,17 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Tabs } from "expo-router";
+import { getAuth } from '@react-native-firebase/auth';
+import { Redirect, Tabs } from "expo-router";
 import { useColorScheme } from "react-native";
 import { DarkModePalette } from "../stylesheet/dark";
 import { LightModePalette } from "../stylesheet/light";
 
 export default function TabLayout() {
     const Palette = (useColorScheme() === "dark")? DarkModePalette : LightModePalette
+    const user = getAuth().currentUser;
+
+    if (!user) {
+        return <Redirect href = "/(auth)/login" />
+    }
 
     return (
         <Tabs

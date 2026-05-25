@@ -77,9 +77,11 @@ export default function Home() {
 				<Text style = {[
 					HomeStyleSheet.timer_text,
 					{
-
+						color : ColorPalette.color1,
 					}
-				]}>Previous Time: {gatTimeString(previousTime)}</Text>
+				]}>
+					Previous Time: {gatTimeString(previousTime)}
+				</Text>
 				<Pressable
 					onPress = {recordButton}
 					style = {({pressed}) => [

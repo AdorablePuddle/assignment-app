@@ -7,6 +7,7 @@ export const LightModePalette = {
     color1 : "#FF2893", 
     color2 : "#FF89C4", 
     white : "#FFFFFF", 
+    warning : "#FF0000",
 };
 
 const screenDimensions = Dimensions.get('screen');
