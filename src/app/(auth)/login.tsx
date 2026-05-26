@@ -98,6 +98,9 @@ export default function Login() {
 					<TextInput
 						style = {[
 							LoginStyleSheet.email_field,
+							{
+								color : ColorPalette.text,
+							}
 						]}
 						onChangeText = {setEmail}
 						value = {email}
@@ -108,6 +111,9 @@ export default function Login() {
 					<TextInput
 						style = {[
 							LoginStyleSheet.password_field,
+							{
+								color : ColorPalette.text,
+							}
 						]}
 						onChangeText = {setPassword}
 						value = {password}
@@ -211,7 +217,6 @@ const LoginStyleSheet = StyleSheet.create({
 		padding : 10,
 		margin : 5,
 		fontSize : 15,
-		color : "#ffffff",
 	},
 	password_field : {
 		width : 325,
@@ -221,7 +226,6 @@ const LoginStyleSheet = StyleSheet.create({
 		padding : 10,
 		margin : 5,
 		fontSize : 15,
-		color : "#ffffff",
 	},
 	login_button : {
 		borderColor : "#ffffff",

@@ -81,6 +81,9 @@ export default function Login() {
 					<TextInput
 						style = {[
 							RegisterStyleSheet.email_field,
+							{
+								color : ColorPalette.text,
+							}
 						]}
 						onChangeText = {setEmail}
 						value = {email}
@@ -91,6 +94,9 @@ export default function Login() {
 					<TextInput
 						style = {[
 							RegisterStyleSheet.password_field,
+							{
+								color : ColorPalette.text,
+							}
 						]}
 						onChangeText = {setPassword}
 						value = {password}
@@ -155,7 +161,6 @@ const RegisterStyleSheet = StyleSheet.create({
 		padding : 10,
 		margin : 5,
 		fontSize : 15,
-		color : "#ffffff",
 	},
 	password_field : {
 		width : 325,
@@ -165,7 +170,6 @@ const RegisterStyleSheet = StyleSheet.create({
 		padding : 10,
 		margin : 5,
 		fontSize : 15,
-		color : "#ffffff",
 	},
 	warning : {
 		fontSize : 15,

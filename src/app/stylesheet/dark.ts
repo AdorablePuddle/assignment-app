@@ -8,6 +8,7 @@ export const DarkModePalette = {
     color2 : "#00b3b6",  
     white : "#FFFFFF",
     warning : "#FF0000",
+    text : "#FFFFFF",
 };
 
 const screenDimensions = Dimensions.get('screen');

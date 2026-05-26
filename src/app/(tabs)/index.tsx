@@ -1,4 +1,4 @@
-import { Image, ImageBackground, Pressable, StyleSheet, Text, useColorScheme, View } from "react-native";
+import { Image, ImageBackground, Pressable, StyleSheet, Text, ToastAndroid, useColorScheme, View } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -91,6 +91,12 @@ export default function Home() {
 				// Logged time for Debugging:
 				loggedTime : FieldValue.serverTimestamp()
 			}, {merge : true})
+
+			ToastAndroid.showWithGravity(
+				"Data saved!",
+				ToastAndroid.SHORT,
+				ToastAndroid.BOTTOM,
+			)
 			console.log("Data saved for user " + user.uid);
 		} catch (error : any) {
 			console.error(error)

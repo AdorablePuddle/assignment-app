@@ -24,7 +24,7 @@ export default function RootLayout() {
 		const subscriber = onAuthStateChanged(getAuth(), async (user) => {
 			if (user && user.isAnonymous && initializing) {
 				try {
-					console.log("Returning user is a Guest. Clearing session...");
+					// console.log("Returning user is a Guest. Clearing session...");
 					setUser(null);
 					if (initializing) setInitializing(false);
 					await signOut(auth);
@@ -33,10 +33,12 @@ export default function RootLayout() {
 					console.error("Failed to clear guest session on startup: ", e);
 				}
 			} else {
+				/*
 				if (!user)
 					console.log("No active user session found.");
 				else 
-					console.log("Found user session: " + user.email);
+					console.log("Found user session: " + user.uid);
+				*/
 				setUser(user);
 			}
 			if (initializing) setInitializing(false);

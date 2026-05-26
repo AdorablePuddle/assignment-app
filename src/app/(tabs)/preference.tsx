@@ -4,6 +4,7 @@ import { Alert, Appearance, Image, Pressable, ScrollView, StyleSheet, Switch, Te
 import { deleteUser, EmailAuthProvider, getAuth, reauthenticateWithCredential, signOut } from '@react-native-firebase/auth';
 import { LinearGradient } from "expo-linear-gradient";
 
+import { collection, deleteDoc, doc, getDocs, getFirestore, writeBatch } from '@react-native-firebase/firestore';
 import { useEffect, useState } from 'react';
 import { DarkMode, DarkModePalette } from "../stylesheet/dark";
 import { LightMode, LightModePalette } from "../stylesheet/light";
@@ -14,7 +15,7 @@ function setAppearance(appearance : string) {
 
 export default function Preference() {
 	// Variables
-	const [isLoading, setIsLoading] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [darkModeToggle, setDarkModeToggle] = useState(Appearance.getColorScheme());
 
 	const storedColorScheme = useColorScheme();
@@ -67,8 +68,25 @@ export default function Preference() {
 
 	const deleteUserData = async (uid: string) => {
 		console.log("Deleting data for user: ", uid);
-		// Wiping data from here:
+		// Wiping data recursively:
+		const db = getFirestore();
+		const collectionRef = collection(db, `users/${uid}/activities`);
+		const snapshot = await getDocs(collectionRef);
 
+		const batch = writeBatch(db);
+
+		snapshot.forEach((document) => {
+			batch.delete(document.ref);
+		})
+
+		if (!snapshot.empty) {
+			await batch.commit();
+			console.log(`Deleted ${snapshot.size} logs.`);
+		}
+
+		// Wiping total data:
+		const docRef = doc(db, `user/${uid}`);
+		await deleteDoc(docRef);
 		console.log("Finish data removal");
 	}
 
@@ -102,7 +120,7 @@ export default function Preference() {
 				console.error("Account deletion voided.");
 			}
 		} finally {
-			setIsLoading(false);
+			setLoading(false);
 		}
 	}
 
@@ -134,7 +152,7 @@ export default function Preference() {
 								thumbColor = {ColorPalette.color1}
 								onValueChange = {toggleDarkMode}
 								value = {(darkModeToggle === "dark")? true : false}
-								disabled = {isLoading}
+								disabled = {loading}
 							/>
 						</View>
 					</View>
@@ -156,7 +174,7 @@ export default function Preference() {
 								},
 								PreferenceStyleSheet.setting_logout_box,
 							]}
-							disabled = {isLoading}
+							disabled = {loading}
 						>
 							<Text
 								style = {[
@@ -173,7 +191,7 @@ export default function Preference() {
 						{
 							(user?.isAnonymous)? <></> : (
 								<Pressable
-									disabled = {isLoading}
+									disabled = {loading}
 								>
 									<Text
 										style = {[
