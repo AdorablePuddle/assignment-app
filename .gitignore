@@ -42,6 +42,8 @@ app-example
 /ios
 /android
 
+/release
+
 # confidential
 /key
 .env
