@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#E6F4FE"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
@@ -52,10 +52,11 @@
         "expo-build-properties",
         {
           "android": {
-            "minSdkVersion": 26,
+            "minSdkVersion": 26
           }
         }
       ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,

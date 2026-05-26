@@ -130,7 +130,7 @@ export default function Home() {
 					resizeMode = "stretch"
 					style = {HomeStyleSheet.image}
 				>
-					<Text style = {[ColorScheme.content, HomeStyleSheet.text]}>{stepCounter}</Text>
+					<Text testID = "step_counter" style = {[ColorScheme.content, HomeStyleSheet.text]}>{stepCounter}</Text>
 				</ImageBackground>
 				<Text style = {[
 					HomeStyleSheet.timer_text,

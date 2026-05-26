@@ -124,7 +124,7 @@ export default function Login() {
 					{
 						// Error checks:
 					}
-					<Text style = {LoginStyleSheet.warning}>
+					<Text testID = "warning" style = {LoginStyleSheet.warning}>
 						{
 							warning
 						}
@@ -140,6 +140,7 @@ export default function Login() {
 						]}
 						onPress = {handleLogin}
 						disabled = {loading}
+						testID = "login_button"
 					>
 						<Text style = {LoginStyleSheet.login_button_text}>Login</Text>
 					</Pressable>
@@ -154,6 +155,7 @@ export default function Login() {
 						]}
 						onPress = {handleRegistration}
 						disabled = {loading}
+						testID = "register_button"
 					>
 						<Text style = {[
 							LoginStyleSheet.login_button_text,
@@ -168,6 +170,7 @@ export default function Login() {
 						]}
 						onPress = {handleGuestLogin}
 						disabled = {loading}
+						testID = "guest_button"
 					>
 						<Text style = {[
 							LoginStyleSheet.login_button_text,

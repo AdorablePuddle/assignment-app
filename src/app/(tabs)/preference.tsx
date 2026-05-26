@@ -153,6 +153,7 @@ export default function Preference() {
 								onValueChange = {toggleDarkMode}
 								value = {(darkModeToggle === "dark")? true : false}
 								disabled = {loading}
+								testID = "dark_mode_toggle"
 							/>
 						</View>
 					</View>
@@ -175,6 +176,7 @@ export default function Preference() {
 								PreferenceStyleSheet.setting_logout_box,
 							]}
 							disabled = {loading}
+							testID = "log_out_button"
 						>
 							<Text
 								style = {[
