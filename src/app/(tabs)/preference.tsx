@@ -170,21 +170,25 @@ export default function Preference() {
 								Log out
 							</Text>
 						</Pressable>
-						<Pressable
-							disabled = {isLoading}
-						>
-							<Text
-								style = {[
-									PreferenceStyleSheet.setting_text,
-									{
-										color : ColorPalette.warning,
-									}
-								]}
-								onPress = {deleteAccountConfirmation}
-							>
-								Delete Account
-							</Text>
-						</Pressable>
+						{
+							(user?.isAnonymous)? <></> : (
+								<Pressable
+									disabled = {isLoading}
+								>
+									<Text
+										style = {[
+											PreferenceStyleSheet.setting_text,
+											{
+												color : ColorPalette.warning,
+											}
+										]}
+										onPress = {deleteAccountConfirmation}
+									>
+										Delete Account
+									</Text>
+								</Pressable>
+							)
+						}
 					</View>
 				</ScrollView>
 			</LinearGradient>
