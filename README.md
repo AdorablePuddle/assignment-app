@@ -1,50 +1,76 @@
-# Welcome to your Expo app 👋
+# Puddle's StepApp
+This repository is for those who would like to install and build the application themselves. Release builds are delivered separately.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+## I. Prerequisites
+Installing dependencies:
+```sh
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 1. Development Build
 
-## Learn more
+Before building the app, you need the `google-service.json` file provided by the firebase console. Place the file into the "key" folder (if the folder does not exist, create it yourself).
 
-To learn more about developing your project with Expo, look at the following resources:
+To build the app, you need the Android SDK of 26 or higher. The Android SDK can be installed from the Android Studio installer. The process for building the application locally is provided below, assuming that you had installed the Android SDK and the environment variable for ANDROID_HOME:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Prebuild:
+```sh
+npx expo prebuild --clean
+```
 
-## Join the community
+Once prebuild is done, plug your android device into the machine you use to build and run the following command:
+```sh
+npx expo run:android
+```
 
-Join our community of developers creating universal apps.
+### 2. Release Build
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+To build the app in production mode, you require the same Android SDK from the above section.
+
+Prebuild:
+```sh
+npx expo prebuild --clean
+```
+
+Once prebuild is done, execute the following commands:
+```sh
+cd android
+gradlew assembleRelease
+```
+
+Your build will be located in \android\app\build\outputs\apk\release\app-release.apk
+
+## II. Documentation
+The application utilizes a number of libraries:
+- expo-router
+- expo-secure-store
+- @react-native-firebase/app
+- @react-native-firebase/auth
+- expo-build-properties
+- @dongminyu/react-native-step-counter
+- expo-linear-gradient
+
+It is recommended to check their documentation out for further explanation on exactly what each of them do. In short, expo-router is used for application navigation, expo-secure-store for user-specific data (example: theme selection), react-native-firebase is used for firestore usage and authentication using email / password. react-native-step-counter in place of expo-sensor for step counting and expo-linear-gradient is used for background.
+
+The main application folder structure is as such:
+```
+src / app
+      | (auth) // The authentication flow
+      | | _layout.tsx
+      | | login.tsx
+      | | register.tsx
+      | (tabs) // The main application flow
+      | | _layout.tsx
+      | | index.tsx
+      | | preference.tsx
+      | | tracking.tsx
+      | assets // Extra assets
+      | | images
+      | | | distance_light.png
+      | | | top_light.png
+      | stylesheet // Theme-specific stylesheets
+      | | dark.ts
+      | | light.ts
+      | _layout.tsx // Handling main navigations
+      | +not-found.tsx
+```
