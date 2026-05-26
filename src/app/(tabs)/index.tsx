@@ -12,12 +12,19 @@ import {
 	stopStepCounterUpdate
 } from "@dongminyu/react-native-step-counter";
 
+import { collection, doc, FieldValue, getFirestore, setDoc } from "@react-native-firebase/firestore";
+
+import { getAuth } from "@react-native-firebase/auth";
+
 export default function Home() {
 	// Variables
 	const [isRecording, setIsRecording] = useState(false);
 	const [stepCounter, setStepCounter] = useState(0);
 	const [startTime, setStartTime] = useState(0);
 	const [previousTime, setPreviousTime] = useState(0);
+
+	const auth = getAuth();
+	const user = auth.currentUser;
 
 	// Defining images and appearances
 	const ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
@@ -42,14 +49,59 @@ export default function Home() {
 			stopStepCounterUpdate();
 			const currentTime = Date.now();
 			setPreviousTime(currentTime - startTime);
+
+			// Save data:
+			saveData(currentTime - startTime);
 		}
 		setIsRecording(!isRecording);
 	}
 
+	const saveData = async (duration : number) => {
+		if (user == null) {
+			console.log("User is null. Cannot save data.");
+			return;
+		}
+		try {
+			const rid = startTime.toString(); // rid == Run ID
+
+			/* 
+			Old version.
+			await firestore() // Data is saved in /users/{userID}/activities/{dateStr}/
+				.collection("users")
+				.doc(user.uid)
+				.collection("activities")
+				.doc(rid)
+				.set({
+					startTime : startTime,
+					stepsCount : stepCounter,
+					timeTaken : duration,
+
+					// Logged time for Debugging:
+					loggedTime : FieldValue.serverTimestamp()
+				}, {merge : true})
+			*/
+			
+			const database = getFirestore();
+			const docRef = doc(collection(doc(collection(database, "users"), user.uid), "activities"), rid);
+			await setDoc(docRef, {
+				startTime : startTime,
+				stepsCount : stepCounter,
+				timeTaken : duration,
+
+				// Logged time for Debugging:
+				loggedTime : FieldValue.serverTimestamp()
+			}, {merge : true})
+			console.log("Data saved for user " + user.uid);
+		} catch (error : any) {
+			console.error(error)
+		}
+		
+	}
+
 	const gatTimeString = (ms : number) : string => {
 		const second = (ms / 1000) % 60;
-		const minute = Math.round(((ms / 1000) / 60)) % 60;
-		const hour   = Math.round(minute / 60);
+		const minute = Math.floor(((ms / 1000) / 60)) % 60;
+		const hour   = Math.floor(minute / 60);
 		return hour + ((minute < 10)? ":0" : ":") + minute + ((second < 10)? ":0" : ":") + second;
 	}
 

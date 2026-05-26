@@ -8,11 +8,14 @@ import { LightMode, LightModePalette } from "../stylesheet/light";
 export default function Tracking() {
 	// Variables
 
+
 	// Defining images and appearances
 	const ColorScheme = (useColorScheme() === "dark")? DarkMode : LightMode;
 	const ColorPalette = (useColorScheme() === "dark")? DarkModePalette : LightModePalette;
 
 	const TopImage = require("../assets/images/top_light.png");
+
+	// Load data
 
 	return (
 		<View style = {ColorScheme.main}>
