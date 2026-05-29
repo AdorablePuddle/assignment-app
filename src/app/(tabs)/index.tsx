@@ -105,10 +105,13 @@ export default function Home() {
 	}
 
 	const gatTimeString = (ms : number) : string => {
-		const second = (ms / 1000) % 60;
-		const minute = Math.floor(((ms / 1000) / 60)) % 60;
-		const hour   = Math.floor(minute / 60);
-		return hour + ((minute < 10)? ":0" : ":") + minute + ((second < 10)? ":0" : ":") + second;
+		const miliseconds = ms % 1000;
+		const totalSeconds = Math.floor(ms / 1000);
+		const seconds = totalSeconds % 60;
+		const totalMinutes = Math.floor(totalSeconds / 60);
+		const minutes = totalMinutes % 60;
+		const hours = Math.floor(totalMinutes / 60);
+		return `${hours}:${(minutes < 10)? "0" : ""}${minutes}:${(seconds < 10)? "0" : ""}${seconds}.${(miliseconds < 10)? "00" : ((miliseconds < 100)? "0" : "")}${miliseconds}`;
 	}
 
 	return (
